@@ -36,4 +36,59 @@ La definición de hipótesis la realiza el científico de datos. Para este caso,
 Tenga en cuenta que en este caso solo estamos probando en H1 si la distancia recorrida por la pelota es diferente. A esto se le llama prueba de dos colas. Podríamos probar si la distancia recorrida es mayor que un valor o menor que un valor, en cuyo caso sería una prueba de una cola.
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/aad0c34c-5c66-4284-aa18-fab7d64c9b37)
 
-Continua...
+# Iniciar trabajos en RStudio
+***Configurar el directorio de trabajo***
+- setwd("/Users/EricHenriquedaSilvaP/Desktop/TestesH/Arquivos")
+- getwd()
+
+***Paquetes Requeridos***
+- install.packages("readxl")
+- install.packages("e1071")
+- library(readxl)
+- library(e1071)
+
+***Cargando y viendo el conjunto de datos***
+- dados <- read_excel("balon_futbol.xlsx")
+- View(dados)
+- dim(dados)
+- str(dados)
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/74d6e476-a154-408c-8389-3078df1bd9a5)
+
+***Comprobando valores faltantes***
+- colSums(is.na(dados))
+
+***Calculando las estadisticas***
+- summary(dados)
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/d0cd4a48-55c4-45ab-acc5-c201be245f3b)
+
+***Vector con el nombre de estadísticas***
+- nomes_stats <- c("Média", "Desvio Padrão", "Variância", "Tipo de Bola")
+
+***Calcular estadísticas para la bola recubierta actual***
+- dados_stats_atual <- c(round(mean(dados$Atual), digits = 2),
+                       round(sd(dados$Atual), digits = 2), 
+                       round(var(dados$Atual), digits = 2),
+                       "Bola com Revestimento Atual")
+
+***Calcular estadísticas para la bola recién recubierta***
+- dados_stats_novo <- c(round(mean(dados$Novo), digits = 2), 
+                      round(sd(dados$Novo), digits = 2), 
+                      round(var(dados$Novo), digits = 2),
+                      "Bola com Revestimento Novo")
+
+***Combinar resultados para comparar***
+- dados_stats_combined <- rbind(nomes_stats, dados_stats_atual, dados_stats_novo)
+- View(dados_stats_combined)
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/b2f9726f-bf7b-4f9d-817f-b7ea29ee99e9)
+
+## Análisis univariado
+***Range1***
+- range_atual <- max(dados$Atual) - min(dados$Atual)
+- range_atual
+
+***Range2***
+- range_novo <- max(dados$Novo) - min(dados$Novo)
+- range_novo
