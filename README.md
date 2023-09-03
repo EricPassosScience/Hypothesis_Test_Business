@@ -93,7 +93,7 @@ Tenga en cuenta que en este caso solo estamos probando en H1 si la distancia rec
 - range_novo <- max(dados$Novo) - min(dados$Novo)
 - range_novo
 
-***Rango intercuartil***
+***Intervalo Intercuartil***
 - summary(dados)
 - IQR_atual <- IQR(dados$Atual)
 - IQR_atual
