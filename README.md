@@ -101,3 +101,10 @@ Tenga en cuenta que en este caso solo estamos probando en H1 si la distancia rec
 - IQR_novo <- IQR(dados$Novo)
 - IQR_novo
 
+***Algunas Observaciones***
+
+El rango intercuartil de ambas variables equivale aproximadamente a 12, es decir, no existe diferencia entre los valores del primer al tercer cuartil (valores alrededor de la media)
+
+Del promedio se puede decir que las pelotas del modelo de recubrimiento actual recorren una distancia mayor que las pelotas del nuevo modelo, pero la desviación estándar es muy similar. Por tanto, podemos decir que no existe ninguna diferencia (significativa) entre los dos modelos de revestimientos de pelotas.
+
+***Representación Gráfica***
