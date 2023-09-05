@@ -2,6 +2,7 @@
 
 Considerando su importancia, agrego nuevamente en este repositorio una nueva prueba de hipótesis.
 
+**********************
 # Prueba de Hipótesis
 Las pruebas de hipótesis desempeñan un papel clave tanto en el ámbito estadístico como empresarial, proporcionando un enfoque sistemático para evaluar suposiciones y tomar decisiones informadas. Este método implica formular una hipótesis sobre una situación o fenómeno, recopilar datos relevantes, aplicar una prueba estadística adecuada y, en función de los resultados, aceptar o rechazar la hipótesis formulada.
 
@@ -15,6 +16,7 @@ En el contexto empresarial, las pruebas de hipótesis son de gran importancia. L
 - **Apoyar la innovación**: al desarrollar nuevos productos o servicios, las empresas deben evaluar si existe una demanda real y sostenible. Las pruebas de hipótesis ayudan a comprobar si las innovaciones propuestas tienen un impacto significativo antes de invertir recursos sustanciales en ellas.
 - **Evidencia científica**: Para las empresas que buscan asociaciones, inversores o financiación, la capacidad de respaldar sus afirmaciones con datos estadísticos fiables puede aumentar la credibilidad y la confianza de las partes interesadas.
 
+*********************************************
 # Pruebas de hipótesis en la industria del deporte
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/f86b1c35-d323-4131-b38c-d29139381275)
 
@@ -36,16 +38,21 @@ La definición de hipótesis la realiza el científico de datos. Para este caso,
 Tenga en cuenta que en este caso solo estamos probando en H1 si la distancia recorrida por la pelota es diferente. A esto se le llama prueba de dos colas. Podríamos probar si la distancia recorrida es mayor que un valor o menor que un valor, en cuyo caso sería una prueba de una cola.
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/aad0c34c-5c66-4284-aa18-fab7d64c9b37)
 
+*******************************
 # Iniciar trabajos en RStudio
 ***Configurar el directorio de trabajo***
 - setwd("/Users/EricHenriquedaSilvaP/Desktop/TestesH/Arquivos")
 - getwd()
+
+***********************
 
 ***Paquetes Requeridos***
 - install.packages("readxl")
 - install.packages("e1071")
 - library(readxl)
 - library(e1071)
+
+*************************************
 
 ***Cargando y viendo el conjunto de datos***
 - dados <- read_excel("balon_futbol.xlsx")
@@ -55,44 +62,53 @@ Tenga en cuenta que en este caso solo estamos probando en H1 si la distancia rec
 
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/74d6e476-a154-408c-8389-3078df1bd9a5)
 
+*****************************************
+
 ***Comprobando valores faltantes***
 - colSums(is.na(dados))
 
+****************************************
 ***Calculando las estadisticas***
 - summary(dados)
 
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/d0cd4a48-55c4-45ab-acc5-c201be245f3b)
 
+********************************************
 ***Vector con el nombre de estadísticas***
 - nomes_stats <- c("Média", "Desvio Padrão", "Variância", "Tipo de Bola")
 
+******************************************
 ***Calcular estadísticas para la bola recubierta actual***
 - dados_stats_atual <- c(round(mean(dados$Atual), digits = 2),
                        round(sd(dados$Atual), digits = 2), 
                        round(var(dados$Atual), digits = 2),
                        "Bola com Revestimento Atual")
 
+*************************************************
 ***Calcular estadísticas para la bola recién recubierta***
 - dados_stats_novo <- c(round(mean(dados$Novo), digits = 2), 
                       round(sd(dados$Novo), digits = 2), 
                       round(var(dados$Novo), digits = 2),
                       "Bola com Revestimento Novo")
 
+*****************************************************
 ***Combinar resultados para comparar***
 - dados_stats_combined <- rbind(nomes_stats, dados_stats_atual, dados_stats_novo)
 - View(dados_stats_combined)
 
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/b2f9726f-bf7b-4f9d-817f-b7ea29ee99e9)
 
+******************************************************
 ## Análisis univariado
 ***Range1***
 - range_atual <- max(dados$Atual) - min(dados$Atual)
 - range_atual
 
+*************************************************
 ***Range2***
 - range_novo <- max(dados$Novo) - min(dados$Novo)
 - range_novo
-
+***************************************
 ***Intervalo Intercuartil***
 - summary(dados)
 - IQR_atual <- IQR(dados$Atual)
@@ -100,11 +116,75 @@ Tenga en cuenta que en este caso solo estamos probando en H1 si la distancia rec
 
 - IQR_novo <- IQR(dados$Novo)
 - IQR_novo
-
+******************************************
 ***Algunas Observaciones***
 
-El rango intercuartil de ambas variables equivale aproximadamente a 12, es decir, no existe diferencia entre los valores del primer al tercer cuartil (valores alrededor de la media)
+El Intervalo intercuartil de ambas variables equivale aproximadamente a 12, es decir, no existe diferencia entre los valores del primer al tercer cuartil (valores alrededor de la media)
 
 Del promedio se puede decir que las pelotas del modelo de recubrimiento actual recorren una distancia mayor que las pelotas del nuevo modelo, pero la desviación estándar es muy similar. Por tanto, podemos decir que no existe ninguna diferencia (significativa) entre los dos modelos de revestimientos de pelotas.
 
-***Representación Gráfica***
+ ****************************
+***Algunas observaciones***
+
+La distribución normal es la distribución más fácil con la que trabajar para comprender las estadísticas. Las distribuciones en la vida real suelen estar sesgadas. Demasiada asimetría y demasiadas técnicas estadísticas no funcionan. Como resultado, se utilizan técnicas matemáticas avanzadas, incluidos logaritmos y técnicas de regresión cuantil.
+
+Podemos ver algunos métodos para diferentes distribuciones en la siguiente imagen:
+
+![imagem_](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/16e6bd17-deaa-4d35-bb53-06ffd4607d68)
+Source: XKCD 2048 as amended by Anton Antonov for a 2019 talk at an R-user meeting in Boston.
+
+Referencia de imagen -> http://www.econ.uiuc.edu/~roger/research/rq/rq.html
+
+*****************************
+# REPRESENTACIÓN GRÁFICA
+*****************************
+***Ajusta el área de la trama***
+- par(mfrow = c(2,2))
+
+***HISTOGRAMA***
+## Histograma
+Un histograma está sesgado hacia la derecha si el pico del histograma se desplaza hacia la izquierda. Por tanto, la cola del histograma tiene pendiente derecha positiva. El razonamiento inverso es el mismo.
+
+- hist(dados$Atual, 
+     main = "Distancia - Pelota con revestimiento actual", 
+     xlab = "Distância (metros)", 
+     ylab = "Numero de Pelotas", 
+     col = "Blue")
+
+- hist(dados$Novo, 
+     main = "Distancia - Pelota con revestimiento actual", 
+     xlab = "Distancia (metros)", 
+     ylab = "Número de Pelotas", 
+     col = "Green")
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/0a1def59-eee3-4f94-8f24-236c62c75821)
+
+*****************************
+## BOXPLOT
+- boxplot(dados$Atual, 
+        main = "Distancia - Pelota con revestimiento actual", 
+        xlab = "Distancia (metros)", 
+        ylab = "Número de Pelotas", 
+        col = "Blue", 
+        horizontal = TRUE)
+
+- boxplot(dados$Novo, 
+        main = "Distancia - Pelota con revestimiento nuevo", 
+        xlab = "Distancia (metros)", 
+        ylab = "Número de Pelotas", 
+        col = "Green", 
+        horizontal = TRUE)
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/7ab702aa-9601-4f29-bc9f-a040b6e47e52)
+*************************************
+Boxplot asimétrico izquierdo:
+Si la mayoría de las observaciones están en el extremo superior de la escala, el diagrama de caja estará sesgado hacia la izquierda. En consecuencia, el "bigote" izquierdo es más largo que el "bigote" derecho. Como resultado, la media es menor que la mediana.
+
+Boxplot asimétrico a la derecha:
+Si un diagrama de caja está sesgado hacia la derecha, el cuadro se desplazará hacia la izquierda y el "bigotes" derecho se hará más largo. Como resultado, la media es mayor que la mediana.
+
+Por lo tanto, la variable revestida de corriente está sesgada hacia la derecha, ya que la mayoría de los datos se encuentran a la derecha del "pico". La media es mayor que la mediana.
+
+La nueva variable de recubrimiento también está sesgada (asimétrica) hacia la derecha, ya que la mayoría de los datos se encuentran a la derecha del gráfico. La media es mayor que la mediana.
+********************************************
+***ASÍMETRIA***
