@@ -188,3 +188,57 @@ Por lo tanto, la variable revestida de corriente está sesgada hacia la derecha,
 La nueva variable de recubrimiento también está sesgada (asimétrica) hacia la derecha, ya que la mayoría de los datos se encuentran a la derecha del gráfico. La media es mayor que la mediana.
 ********************************************
 ***ASÍMETRIA***
+
+Si una cola es más larga que la otra, la distribución es asimétrica o sesgada. Estas distribuciones a veces se denominan distribuciones asimétricas porque no muestran ningún tipo de simetría. La simetría significa que la mitad de la distribución es una imagen especular de la otra mitad. Por ejemplo, la distribución normal es una distribución simétrica sin pendiente. Las colas son exactamente iguales.
+
+Una distribución sesgada hacia la izquierda tiene una cola izquierda larga. Las distribuciones sesgadas hacia la izquierda también se denominan distribuciones sesgadas negativamente. Esto se debe a que hay una cola larga en la dirección negativa en la recta numérica. La media está a la izquierda del pico.
+
+Una distribución sesgada a la derecha tiene una cola derecha larga. Las distribuciones de pendiente derecha también se denominan distribuciones de pendiente positiva. Esto se debe a que hay una cola larga en dirección positiva en la recta numérica. La media está a la derecha del pico.
+
+En una distribución normal, la media y la mediana son el mismo número, mientras que la media y la mediana en una distribución asimétrica se convierten en números diferentes. Luego podemos calcular el coeficiente de asimetría.
+
+Si la asimetría es menor que -1 o mayor que 1, la distribución está muy asimétrica. Si la asimetría está entre -1 y -0,5 o entre 0,5 y 1, la distribución está moderadamente asimétrica (asimétrica). Si la asimetría está entre -0,5 y 0,5, la distribución es aproximadamente simétrica.
+
+Una medida positiva indicaría que la media de los valores de los datos es mayor que la mediana y la distribución de los datos está sesgada hacia la derecha.
+
+Una medida negativa indica que la media de los valores de los datos es menor que la mediana y la distribución de los datos está sesgada hacia la izquierda.
+****************************************
+skewness(dados$Atual)
+- 0.2835894
+
+summary(dados$Atual)
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/13084658-6419-43f7-8b1a-3f85f94c1051)
+
+skewness(dados$Novo)
+- 0.2221244
+
+summary(dados$Novo)
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/09a71d47-e06a-40f0-8545-f8f9f924470e)
+*****************************
+***CURTOSIS***
+
+La curtosis informa sobre la altura y la nitidez del pico central en relación con una curva de campana estándar. La distribución normal tiene una curtosis igual a cero.
+
+Una curtosis negativa significa que su distribución es más aplanada que una curva normal con la misma media y desviación estándar. El razonamiento inverso es el mismo.
+********************************
+- kurtosis(dados$Atual)
+- kurtosis(dados$Novo)
+ 
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/3de482ed-b56f-4e18-bbd2-af634984947b)
+
+***********************************
+Si estás realizando una prueba estadística paramétrica en tus datos (por ejemplo, un ANOVA), el uso de datos altamente sesgados hacia la derecha o hacia la izquierda puede llevar a resultados engañosos. Por lo tanto, si deseas realizar una prueba con este tipo de datos, realiza una transformación logarítmica y luego lleva a cabo la prueba en los números transformados.
+**********************************
+***TEST DE NORMALIDAD - PRUEBA DE SHAPIRO***
+- Hipótesis Nula (H0): Los datos siguen una distribución normal.
+- Hipótesis Alternativa (H1): Los datos no siguen una distribución normal.
+**********************************
+Si el valor p es mayor que 0.05, no rechazamos la hipótesis nula y podemos asumir que los datos siguen una distribución normal.
+
+Si el valor p es menor que 0.05, rechazamos la hipótesis nula y no podemos asumir que los datos siguen una distribución normal.
+
+
+
+
