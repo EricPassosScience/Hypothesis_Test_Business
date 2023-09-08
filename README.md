@@ -308,11 +308,17 @@ Valor p alto: poca o ninguna evidencia empírica contra H0.
 ******************************
 ***Determinación de la fuerza de la prueba y el tamaño óptimo de la muestra***
 *******************************
+***Diferencia de Medias***
+- delta_mean <- mean(dados$Atual) - mean(dados$Novo)
+- delta_mena
+
+[1] 2.775
+**********************************
 ***Desviación estándar de la diferencia entre los datos:***
 - delta_desvio <- sd(dados$Atual - dados$Novo)
 - delta_desvio
   
-[1] 2.775
+[1] 13.74397
 
 ***Size Effect:***
 - size_effect = delta_mean/delta_desvio
