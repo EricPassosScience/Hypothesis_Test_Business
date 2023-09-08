@@ -238,7 +238,99 @@ Si estás realizando una prueba estadística paramétrica en tus datos (por ejem
 Si el valor p es mayor que 0.05, no rechazamos la hipótesis nula y podemos asumir que los datos siguen una distribución normal.
 
 Si el valor p es menor que 0.05, rechazamos la hipótesis nula y no podemos asumir que los datos siguen una distribución normal.
+********************************
+- ?shapiro.test
+- shapiro.test(dados$Atual)
+- shapiro.test(dados$Novo)
 
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/0bc57d8a-788c-443e-be68-7748b51aebb8)
 
+***CONCLUSIÓN DEL ANÁLISIS UNIVARIADO:***
 
+Del diagrama de caja y de otros análisis se puede decir que no hay discrepancias. La media del modelo de recubrimiento actual es 270,3 y la media del nuevo modelo es 267,5 y la desviación estándar del actual es 8,7529 y la desviación estándar del nuevo es 9,8969. No parece haber una diferencia significativa.
+************************************
+***ANÁLISIS BIVARIADO***
+***Ajusta el área de la trama***
+- par(mfrow = c(1,1))
+***Scatter Plot***
+- plot(dados$Atual, dados$Novo)
 
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/c8f227cb-fe38-4726-adb0-413db3763887)
+
+***Correlación***
+- cor(dados$Atual, dados$Novo)
+
+[1] -0.08272974
+******************************
+## Prueba de Hipótesis:
+La prueba de hipótesis es una forma de inferencia estadística que utiliza datos de una muestra para sacar conclusiones sobre un parámetro poblacional o una distribución de probabilidad poblacional.
+
+Primero, se hace una suposición tentativa sobre el parámetro o distribución. Esta suposición se denomina hipótesis nula y se denota por H0. Una hipótesis alternativa (denotada como H1) es lo opuesto a lo que se afirma en la hipótesis nula. El procedimiento de prueba de hipótesis implica el uso de datos de muestra para determinar si H0 puede rechazarse o no.
+
+Si se rechaza H0, la conclusión estadística es que la hipótesis alternativa H1 es verdadera.
+
+***FORMULACIÓN DE LA HIPÓTESIS:***
+
+Hipótesis nula (H0): no existe una diferencia significativa entre la distancia recorrida por balones de fútbol con revestimiento actual y nuevo.
+H0: muCurrent - muNew igual a 0 (cero)
+
+Hipótesis alternativa (H1): existe una diferencia significativa entre la distancia recorrida por balones de fútbol con revestimientos actuales y nuevos.
+H1: muCurrent - muNew diferente de 0 (cero)
+
+La condición preliminar para aplicar la prueba t es la existencia de una distribución normal de datos en ambos grupos de datos.
+
+Sin embargo, ¡hay un punto muerto! Hay tres tipos de pruebas t:
+- prueba t de una muestra
+- prueba t de muestras independientes
+- prueba t de muestras relacionadas (pareadas)
+
+Utilizamos la prueba t de una muestra para comparar los valores de las variables con la media conocida de una población.
+
+Para realizar las pruebas de igualdad de varianzas y las pruebas de medias necesitamos que las dos poblaciones sean independientes. Esta es una prueba de muestras independientes. Por lo tanto emparejado = F.
+***********************************
+- ?t.test
+- teste_hipo <- t.test(dados$Atual, dados$Novo, paired = F, conf.level = 0.95, alternative = "t") 
+- teste_hipo
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/3e7aa3b7-5fb6-4373-8e6f-9239498e1bdc)
+
+La prueba t pareada es útil para analizar el mismo conjunto de elementos que se midieron en dos condiciones diferentes, diferencias en las mediciones tomadas en el mismo sujeto antes y después de un tratamiento, o diferencias entre dos tratamientos administrados al mismo sujeto.
+***************************************
+***INTERPRETACIÓN DE NUESTRO RESULTADO:***
+
+No pudimos rechazar la hipótesis nula, ya que el valor p es mayor que el umbral de 0,05. Es decir, existe una alta probabilidad de que no exista una diferencia significativa entre los tipos de cobertura de los balones de fútbol.
+
+Valor p bajo: evidencia empírica sólida contra H0.
+
+Valor p alto: poca o ninguna evidencia empírica contra H0.
+******************************
+***Determinación de la fuerza de la prueba y el tamaño óptimo de la muestra***
+*******************************
+***Desviación estándar de la diferencia entre los datos:***
+- delta_desvio <- sd(dados$Atual - dados$Novo)
+- delta_desvio
+  
+[1] 2.775
+
+***Size Effect:***
+- size_effect = delta_mean/delta_desvio
+- size_effect
+
+[1] 0.2019067
+*****************************
+***POWER TEST - PRUEBA DE FUERZA***
+- install.packages("pwr")
+- library(pwr)
+- dim(dados): [1] 40  2
+- power_teste <- pwr.t.test(n = 40, d = size_effect, sig.level = 0.05, alternative = "t")
+- power_teste:
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/e2ef958c-0d10-48a6-a462-1a1ed36c8fee)
+***************************
+***Tamaño de Muestra Ideal***
+- tamanho_amostra <- pwr.t.test(power = .95, d = 0.5, type = "t", alternative = "t", sig.level = .05)
+- tamanho_amostra:
+
+![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/e060bc79-d691-4e63-a570-1b9d5df0b86e)
+********************************
+# Conclusiones y Recomendaciones 
