@@ -295,6 +295,8 @@ Para realizar las pruebas de igualdad de varianzas y las pruebas de medias neces
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/3e7aa3b7-5fb6-4373-8e6f-9239498e1bdc)
 
 La prueba t pareada es útil para analizar el mismo conjunto de elementos que se midieron en dos condiciones diferentes, diferencias en las mediciones tomadas en el mismo sujeto antes y después de un tratamiento, o diferencias entre dos tratamientos administrados al mismo sujeto.
+
+En este caso, estamos utilizando la prueba t para muestras independientes.
 ***************************************
 ***INTERPRETACIÓN DE NUESTRO RESULTADO:***
 
