@@ -342,3 +342,24 @@ Valor p alto: poca o ninguna evidencia empírica contra H0.
 ![imagem](https://github.com/EricPassosScience/PySpark_Streaming_Kafka_Recommendation_System/assets/97414922/e060bc79-d691-4e63-a570-1b9d5df0b86e)
 ********************************
 # Conclusiones y Recomendaciones 
+***Resultado de la prueba de hipótesis:***
+- el valor p es 0,188 y por lo tanto no podemos rechazar la hipótesis nula. Por tanto, podemos decir que no existe diferencia entre la distancia recorrida por el balón con la cobertura actual y la nueva;
+- debe haber algún factor distinto del revestimiento que afecte la distancia recorrida por el balón de fútbol;
+- la empresa no debería introducir el nuevo modelo en el mercado.
+*****************************
+***Intervalos de confianza***:
+- Intervalo de confianza del 95% para el modelo actual [273.0743, 267.4757]
+- Intervalo de confianza del 95% para el nuevo modelo [270,6652, 264,3348]
+
+Por lo tanto, la media poblacional respectiva debe estar dentro de este rango para obtener resultados consistentes.
+***********************************
+***Fuerza de la prueba y tamaño de la muestra:***
+- la intensidad de la prueba es 0,144, que es baja;
+- tamaño de la muestra: la prueba debe realizarse con un tamaño de muestra mayor, al menos 105 registros;
+- Siempre es mejor tener un tamaño de muestra mayor para obtener mejores resultados, pero también se deben tener en cuenta otros factores como el coste, la viabilidad y el tiempo.
+**************************************
+***RECOMENDACIONES:***
+- estadísticamente, no hay diferencia significativa entre la distancia recorrida entre balones de fútbol con revestimiento actual y nuevo;
+- la empresa debe continuar su estudio y considerar otros factores que afectan la distancia, como el tamaño y peso de la pelota, su material de fabricación, relleno, tecnología y número de segmentos;
+- también debería considerar la tecnología predominante en el sector y los productos lanzados por sus competidores;
+- a partir de ahora, para aumentar su cuota de mercado, la empresa deberá centrarse en otras áreas como marketing, estrategias, ventas y seguir trabajando en investigación y desarrollo.
